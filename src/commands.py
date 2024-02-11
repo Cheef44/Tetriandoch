@@ -11,8 +11,11 @@ def do_genkey():
     
 def do_enc(enter:list):
     enter = enter[0:]
-    enter_text = enter[enter.index('-t'):enter.index('-f')-1]
     enter_path = enter[-2]
     enter_file = enter[-1]
-    
-    return encryption.EncrtptionText(''.join(enter_text), enter_path, enter_file).encryption_text()
+    if enter[1] == '-t':
+        enter_data = enter[enter.index('-t')+1:enter.index('-f')-1]
+        return encryption.EncrtptionText(''.join(enter_data), enter_path, enter_file).encryption_text()
+    elif enter[1] == '-ft':
+        enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
+        return encryption.EncryptionFile(''.join(enter_data), enter_path, enter_file).encryption_file()
