@@ -2,15 +2,16 @@ from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 import os
 
-class Encrtption:
-    global iv
-    if not os.path.exists('data/vectore.iv'):
-        with open('data/vectore.iv', 'wb') as vectore:
-            g = os.urandom(16)
-            vectore.write(g)
-            
-    with open('data/vectore.iv', 'rb') as iv:
-        iv = iv.read()
+class Encryption:
+    def vectore(self):
+        if not os.path.exists('data/vectore.bin'):
+            with open('data/vectore.bin', 'wb') as vectore:
+                g = os.urandom(16)
+                vectore.write(g)
+                
+        with open('data/vectore.bin', 'rb') as iv:
+            iv = iv.read()
+        return iv
     
     def __init__(self, data:str, enc_path, file, path_async_key='data/asynckey', path_sync_key='data/synckey.pub') -> None:
         self.data = data
@@ -32,9 +33,9 @@ class Encrtption:
         
         return decrypt
 
-class EncrtptionText(Encrtption):
+class EncryptionText(Encryption):
     def encryption_text(self):
-        encrypt = AES.new(self.decrypt_sync_key(), AES.MODE_CFB, iv)
+        encrypt = AES.new(self.decrypt_sync_key(), AES.MODE_CFB, self.vectore())
         encrypt_text = encrypt.encrypt(bytes(self.data, encoding='utf8'))
         if not os.path.exists(self.enc_path):
             os.mkdir(self.enc_path)
@@ -45,12 +46,12 @@ class EncrtptionText(Encrtption):
         else:
             return f'The entered directory exists'
 
-class EncryptionFile(Encrtption):
+class EncryptionFile(Encryption):
     def encryption_file(self):
-        with open(self.data, 'rb') as file:
+        with open(self.data, 'r',encoding='utf-8') as file:
             file = file.read()
-        encrypt = AES.new(self.decrypt_sync_key(), AES.MODE_CFB, iv)
-        encrypt_data = encrypt.encrypt(bytes(self.data, encoding='utf8'))
+        encrypt = AES.new(self.decrypt_sync_key(), AES.MODE_CFB, self.vectore())
+        encrypt_data = encrypt.encrypt(bytes(file, encoding='utf-8'))
         if not os.path.exists(self.enc_path):
             os.mkdir(self.enc_path)
             with open(f'{self.enc_path}/{self.file}.aes', 'wb') as encrypt_file:
