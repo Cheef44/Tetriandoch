@@ -14,4 +14,4 @@ class Decryption(Encryption):
             os.mkdir(self.enc_path)
             with open(f'{self.enc_path}/{self.file}', 'w+', encoding='utf-8') as decryption_file:
                 decryption_file.write(decrypt_data.decode(chardet.detect(decrypt_data)['encoding']))
-        return 'ggg'
+        return f'Decryption was successful, your files are in: {self.enc_path}/{self.file}'
