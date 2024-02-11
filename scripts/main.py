@@ -1,17 +1,17 @@
 import os
 import sys
 sys.path.append(os.path.abspath('../src'))
-from src import db, geniration_keys
+from src import commands
 
 def main():
     try:
         while True:
-            enter = input('>>> ')
-            if enter == 'reg':
-                enter_name = input('UserName: ')
-                enter_password = input('UserPassword: ')
-                print(db.DataBase(enter_password, enter_name).create_db())
-            if enter == 'gen-key':
-                geniration_keys.Keys().run()
+            enter = input('>>> ').split()
+            if enter[0] == 'reg':
+                pass
+            if enter[0] == 'gen-key':
+                pass
+            if enter[0] == 'enc':
+                print(commands.do_enc(enter))
     except KeyboardInterrupt:
         print('\nexit...')
