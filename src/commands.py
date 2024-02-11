@@ -1,4 +1,4 @@
-from src import db, geniration_keys, encryption
+from src import db, geniration_keys, encryption, decryption
 
 def do_reg():
     enter_name = input('UserName: ')
@@ -19,3 +19,11 @@ def do_enc(enter:list):
     elif enter[1] == '-ft':
         enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
         return encryption.EncryptionFile(''.join(enter_data), enter_path, enter_file).encryption_file()
+
+def do_dec(enter:list):
+    enter = enter[0:]
+    enter_path = enter[-2]
+    enter_file = enter[-1]
+    if enter[1] == '-ft':
+        enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
+        return decryption.Decryption(''.join(enter_data), enter_path, enter_file).decryption()
