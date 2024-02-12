@@ -46,3 +46,11 @@ def do_dec(enter:list):
             return 'Missing parameter/s. The command should look like this: dec -ft <file> -f <path_dec_file> <enc_file> or dec -nf -ft <file> -f <path_dec_file> <enc_file>'
     except IndexError:
         return 'Missing parameter/s. The command should look like this: dec -ft <file> -f <path_dec_file> <enc_file> or dec -nf -ft <file> -f <path_dec_file> <enc_file>'
+
+def do_help():
+    return """
+reg | command to register in the system\n
+gen-key | command to generate encryption keys\n
+enc -ft <file> -f <path_enc_file> <enc_file>, enc -t <text> -f <path_enc_file> <enc_file> | The command encrypts the file and writes it along the path to another file. Has such flags as: -ft, -t, -f. -ft is a flag that indicates that a file located in a certain area will be encrypted. -t flag which means that the entered text will be encrypted. -f flag which is used to indicate the path to which the encrypted file will be written\n
+dec -ft <file> -f <dec_file_path> <dec_file>, dec -fn -ft <text> -f <dec_file_path> <dec_file> | The command encrypts the file and writes it to the file path. Has flags such as: -ft, -t, -f. -ft is a flag indicating that a file located in the specified area will be decrypted. The -t flag, which means that the entered text will be decrypted. The -f flag, which is used to specify the path where the decrypted file will be written.\n
+"""

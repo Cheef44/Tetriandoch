@@ -15,5 +15,7 @@ def main():
                 print(commands.do_enc(enter))
             if enter[0] == 'dec':
                 print(commands.do_dec(enter))
+            if enter[0] == 'help':
+                print(commands.do_help())
     except KeyboardInterrupt:
         print('\nexit...')
