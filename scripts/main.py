@@ -8,9 +8,9 @@ def main():
         while True:
             enter = input('>>> ').split()
             if enter[0] == 'reg':
-                pass
+                commands.do_reg()
             if enter[0] == 'gen-key':
-                pass
+                print(commands.do_genkey())
             if enter[0] == 'enc':
                 print(commands.do_enc(enter))
             if enter[0] == 'dec':
