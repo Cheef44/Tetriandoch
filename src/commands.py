@@ -15,7 +15,7 @@ def do_enc(enter:list):
     enter_file = enter[-1]
     if enter[1] == '-t':
         enter_data = enter[enter.index('-t')+1:enter.index('-f')-1]
-        return encryption.EncrtptionText(''.join(enter_data), enter_path, enter_file).encryption_text()
+        return encryption.EncryptionText(''.join(enter_data), enter_path, enter_file).encryption_text()
     elif enter[1] == '-ft':
         enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
         return encryption.EncryptionFile(''.join(enter_data), enter_path, enter_file).encryption_file()
@@ -27,3 +27,6 @@ def do_dec(enter:list):
     if enter[1] == '-ft':
         enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
         return decryption.Decryption(''.join(enter_data), enter_path, enter_file).decryption()
+    elif enter[1] == '-nf':
+        enter_data = enter[enter.index('-ft')+1:]
+        return decryption.Decryption(''.join(enter_data), enter_path, none_file=True).decryption()
