@@ -1,13 +1,11 @@
 from Crypto.Random import get_random_bytes
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
-import os
 
 #Класс для функция связанных с ключами
 class Keys:
     #Метож генерации синхронного ключа
     def gen_sync_key(self):
-        os.mkdir('data/')
         with open('data/synckey.pub', 'wb') as key:
             key.write(get_random_bytes(32))
     
