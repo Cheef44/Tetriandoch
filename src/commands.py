@@ -20,14 +20,19 @@ def do_enc(enter:list):
         enter = enter[0:]
         enter_path = enter[-2]
         enter_file = enter[-1]
-        if enter[1] == '-t':
-            enter_data = enter[enter.index('-t')+1:enter.index('-f')-1]
-            return encryption.EncryptionText(''.join(enter_data), enter_path, enter_file).encryption_text()
-        elif enter[1] == '-ft':
-            enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
-            return encryption.EncryptionFile(''.join(enter_data), enter_path, enter_file).encryption_file()
+        enter_name = input('UserName: ')
+        enter_password = input('UserPassword: ')
+        if db.DataBase(enter_password, enter_name).log_in_db():
+            if enter[1] == '-t':
+                enter_data = enter[enter.index('-t')+1:enter.index('-f')-1]
+                return encryption.EncryptionText(''.join(enter_data), enter_path, enter_file).encryption_text()
+            elif enter[1] == '-ft':
+                enter_data = enter[enter.index('-ft')+1:enter.index('-f')]
+                return encryption.EncryptionFile(''.join(enter_data), enter_path, enter_file).encryption_file()
+            else:
+                return 'Missing parameter/s. The command should look like this: enc -t <text> -f <path_enc_file> <enc_file> or enc -ft <file> -f <path_enc_file> <enc_file>'
         else:
-            return 'Missing parameter/s. The command should look like this: enc -t <text> -f <path_enc_file> <enc_file> or enc -ft <file> -f <path_enc_file> <enc_file>'
+            return 'The entered data is incorrect'
     except IndexError:
         return 'Missing parameter/s. The command should look like this: enc -t <text> -f <path_enc_file> <enc_file> or enc -ft <file> -f <path_enc_file> <enc_file>'
 
